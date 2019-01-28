@@ -12,10 +12,10 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
-%data = load('ex1data1.txt');
-%m = length(data);
-%X = [ones(m, 1), data(:,1)]; % Add a column of ones to x
-%theta = zeros(2,1)
+
+h = (theta' * X')';
+least_squares = (h - y).^2;
+J = (1 / (2*m)) * sum(least_squares);
 
 % =========================================================================
 
