@@ -14,8 +14,8 @@ J = 0;
 %               You should set J to the cost.
 
 h = (theta' * X')';
-least_squares = (h - y).^2;
-J = (1 / (2*m)) * sum(least_squares);
+differences = (h - y);
+J = (1 / (2*m)) * differences' * differences
 
 % =========================================================================
 
