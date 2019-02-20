@@ -8,8 +8,8 @@ function [all_theta] = oneVsAll(X, y, num_labels, lambda)
 %   to the classifier for label i
 
 % Some useful variables
-m = size(X, 1);
-n = size(X, 2);
+m = size(X, 1); % number of training examples == 5000
+n = size(X, 2); % number of elements (pixels) per training example = 400
 
 % You need to return the following variables correctly 
 all_theta = zeros(num_labels, n + 1);
@@ -49,16 +49,12 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
-
-
-
-
-
-
-
-
-
-
+options = optimset('GradObj', 'on', 'MaxIter', 50);
+for c = 1:num_labels
+  % theta is a column vector sized as the number of pixels (features) per example
+  initial_theta = zeros(n + 1, 1);
+  [theta] = fmincg(@(t)(lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
+  all_theta(c,:) = theta';
 
 % =========================================================================
 
