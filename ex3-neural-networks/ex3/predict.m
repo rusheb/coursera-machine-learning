@@ -21,13 +21,17 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
-
-
-
-
-
+% add bias column to X
+a1 = [ones(m, 1) X];
+% calculate hidden layer, size: (25 "features" x 5000 examples)
+z2 = Theta1 * a1';
+% since we aren't going to transpose it, add a bias *row*
+a2 = [ones(1, m); sigmoid(z2)];
+% calculate output layer, size: (10 probabilities x 5000 examples)
+z3 = Theta2 * a2;
+a3 = sigmoid(z3);
+% get the index of the highest probabilty in each column
+[_, p] = max(a3);
 
 % =========================================================================
 
