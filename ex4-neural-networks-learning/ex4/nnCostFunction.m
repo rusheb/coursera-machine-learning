@@ -80,6 +80,11 @@ end
 J = -Y .* log(h) - (1 - Y) .* log(1 -  h); % unregularised
 J = 1/m * sum(sum(J)); % unregularised
 
+% compute the regularisation term (remove the bias term and sum squares of elements)
+Theta1reg = sum(sum( Theta1(:,2:end).^2 ));
+Theta2reg = sum(sum( Theta2(:,2:end).^2 ));
+regularisation_term = lambda / (2*m) * (Theta1reg + Theta2reg);
+J = J + regularisation_term;
 
 % -------------------------------------------------------------
 
