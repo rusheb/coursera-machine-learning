@@ -61,23 +61,24 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+% compute the current hypothesis
+a1 = [ones(m, 1), X];
+z2 = Theta1 * a1';
+a2 = [ones(1, m); sigmoid(z2)];
+z3 = Theta2 * a2;
+a3 = sigmoid(z3);
 
+h = a3;
 
+% y is a column vector with one output for each example (e.g. [1; 3; 4; 2; 7; 5...])
+% we set Y as a row vector of activations (e.g. [1 0 0 0 0 0 0 0 0 0; 0, 0 1 0 0 0 0 0 0 0])
+Y = zeros(num_labels, m); % 10 x 5000
+for i = 1:m
+  Y(y(i), i) = 1;
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = -Y .* log(h) - (1 - Y) .* log(1 -  h); % unregularised
+J = 1/m * sum(sum(J)); % unregularised
 
 
 % -------------------------------------------------------------
