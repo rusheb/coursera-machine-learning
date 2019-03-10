@@ -113,6 +113,12 @@ end
 Theta1_grad = 1/m * Theta1_grad;
 Theta2_grad = 1/m * Theta2_grad;
 
+% step 6: add regularisation term
+reg_term1 = [zeros(size(Theta1, 1), 1), Theta1(:,2:end)]; % do not regularise bias column
+Theta1_grad = Theta1_grad + lambda / m * reg_term1;
+reg_term2 = [zeros(size(Theta2, 1), 1), Theta2(:,2:end)];
+Theta2_grad = Theta2_grad + lambda / m * reg_term2;
+
 % =========================================================================
 
 % Unroll gradients
