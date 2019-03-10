@@ -61,6 +61,8 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+
+% COST---------------------------------------------------------
 % compute the current hypothesis
 a1 = [ones(m, 1), X];
 z2 = Theta1 * a1';
@@ -86,7 +88,30 @@ Theta2reg = sum(sum( Theta2(:,2:end).^2 ));
 regularisation_term = lambda / (2*m) * (Theta1reg + Theta2reg);
 J = J + regularisation_term;
 
-% -------------------------------------------------------------
+% BACKPROPAGATION----------------------------------------------
+for t = 1:m
+  % step 1: feedforward propagation
+  a1_t = [1, X(t,:)]; % a1 is a one followed by the t'th row
+  z2_t = Theta1 * a1_t';
+  a2_t = [1; sigmoid(z2_t)]; % this time we have a column so that we don't have to transpose twice
+  z3_t = Theta2 * a2_t;
+  a3_t = sigmoid(z3_t);
+
+  % step 2: compute delta_3
+  y_t = Y(:, t);
+  delta_3 = a3_t - y_t;
+
+  % step 3: compute delta_2
+  delta_2 = Theta2'(2:end,:) * delta_3 .* sigmoidGradient(z2_t);
+
+  % step 4: accumulate the gradients
+  Theta1_grad = Theta1_grad + (delta_2 * a1_t);
+  Theta2_grad = Theta2_grad + (delta_3 * a2_t');
+end
+
+% step 5: divide by m
+Theta1_grad = 1/m * Theta1_grad;
+Theta2_grad = 1/m * Theta2_grad;
 
 % =========================================================================
 
