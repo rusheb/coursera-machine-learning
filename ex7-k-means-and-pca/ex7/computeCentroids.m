@@ -26,12 +26,11 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+for i = 1:K
+  points_belonging_to_centroid = (idx == i);
+  C_K = X(points_belonging_to_centroid, :);
+  centroids(i, :) = sum(C_K) / size(C_K, 1);
+end
 
 % =============================================================
 
