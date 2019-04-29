@@ -21,11 +21,11 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for i = 1:length(X)
+  datapoint = X(i,:);
+  distances = sum((centroids - datapoint).^2, 2);
+  [_, idx(i)] = min(distances);
+end
 
 % =============================================================
 
