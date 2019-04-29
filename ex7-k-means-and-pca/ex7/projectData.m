@@ -18,8 +18,10 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-
-
+% take the first K components of U
+U = U(:, 1:K);
+% dot product of U with each vector in X
+Z = X * U;
 
 % =============================================================
 
