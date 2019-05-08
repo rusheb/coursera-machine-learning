@@ -42,7 +42,10 @@ Theta_grad = zeros(size(Theta));
 
 predictions = X * Theta';
 least_square_diffs = (predictions - Y).^2;
-J = sum(sum(least_square_diffs .* R)) / 2;
+J_unregularised = sum(sum(least_square_diffs .* R)) / 2;
+theta_regularisation_term = lambda * sum(sum(Theta .^ 2)) / 2;
+X_regularisation_term = lambda * sum(sum(X .^ 2)) / 2;
+J = J_unregularised + theta_regularisation_term + X_regularisation_term;
 
 errors =  predictions - Y;
 errors_for_rated_examples = errors .* R;
