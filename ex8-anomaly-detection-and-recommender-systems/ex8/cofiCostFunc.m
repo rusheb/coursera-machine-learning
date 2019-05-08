@@ -40,20 +40,9 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+predictions = X * Theta';
+least_square_diffs = (predictions - Y).^2;
+J = sum(sum(least_square_diffs .* R)) / 2;
 
 % =============================================================
 
