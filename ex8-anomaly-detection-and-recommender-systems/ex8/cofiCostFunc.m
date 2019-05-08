@@ -44,6 +44,11 @@ predictions = X * Theta';
 least_square_diffs = (predictions - Y).^2;
 J = sum(sum(least_square_diffs .* R)) / 2;
 
+errors =  predictions - Y;
+errors_for_rated_examples = errors .* R;
+X_grad = errors_for_rated_examples * Theta;
+Theta_grad = errors_for_rated_examples' * X;
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
