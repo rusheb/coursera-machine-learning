@@ -49,8 +49,10 @@ J = J_unregularised + theta_regularisation_term + X_regularisation_term;
 
 errors =  predictions - Y;
 errors_for_rated_examples = errors .* R;
-X_grad = errors_for_rated_examples * Theta;
-Theta_grad = errors_for_rated_examples' * X;
+X_grad_unreg = errors_for_rated_examples * Theta;
+Theta_grad_unreg = errors_for_rated_examples' * X;
+X_grad = X_grad_unreg .+ (lambda .* X);
+Theta_grad = Theta_grad_unreg .+ (lambda .* Theta);
 
 % =============================================================
 
